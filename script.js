@@ -7,11 +7,13 @@ const inProgressList = document.getElementById('inProgressList');
 const completedList = document.getElementById('completedList');
 const list = document.getElementById('list');
 const deleteBtn = document.querySelectorAll('.icon');
+const green = document.getElementById('ww');
+const blue = document.querySelector('.blue');
 let notStarted = [];
 let inprogress = [];
 let completed = [];
 let drag = null;
-
+addColor();
 deleteBtn.forEach((btn) => {
   btn.addEventListener('click', function (event) {
     event.target.remove();
@@ -134,15 +136,30 @@ function dragItem() {
 // window.localStorage.setItem('body', document.querySelector('body'));
 // document.body.innerHTML = window.localStorage.getItem('body');
 dragItem();
+//change color
+function addColor() {
+  if (localStorage.getItem('color')) {
+    document.body.className = localStorage.getItem('color');
+    console.log(localStorage.getItem('color'));
+  }
+}
 
-window.addEventListener('onload', function () {
+green.addEventListener('click', function () {
+  localStorage.setItem('color', 'green');
+  addColor();
+});
+blue.addEventListener('click', function () {
+  localStorage.setItem('color', 'blue');
+  addColor();
+});
+render(completed, completedList);
+function addLocal() {
   if (localStorage.completed !== null) {
     completed.push(JSON.parse(localStorage.getItem('completed') || '[]'));
   }
   render(completed, completedList);
   console.log(completed);
-});
+}
+addLocal();
 
 // addEventListener('DOMContentLoaded', dragItem);
-
-render(completed, completedList);
