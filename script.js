@@ -145,7 +145,7 @@ function addColor() {
 }
 
 green.addEventListener('click', function () {
-  localStorage.setItem('color', 'green');
+  localStorage.setItem('color', `''`);
   addColor();
 });
 blue.addEventListener('click', function () {

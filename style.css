@@ -23,6 +23,7 @@ body {
   margin: auto;
   padding: 8rem;
   position: relative;
+  min-height: 100vh;
 }
 body .blue {
   background-color: #112a46;
@@ -154,4 +155,16 @@ ul {
   text-align: center;
   font-size: 1.4rem;
   display: block;
+}
+.footer {
+  /* margin-left: auto;
+  margin-right: auto; */
+  position: absolute;
+  bottom: 15%;
+  left: 45%;
+}
+.footer p {
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: 500;
 }
