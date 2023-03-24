@@ -13,6 +13,11 @@ let notStarted = [];
 let inprogress = [];
 let completed = [];
 let drag = null;
+const all = {
+  notStartedList: 'notStarted',
+  inProgressList: 'inprogress',
+  completedList: 'completed',
+};
 addColor();
 addLocal();
 render(completedList, completed);
@@ -29,15 +34,26 @@ function edit(e) {
   li.querySelector('input').removeAttribute('disabled');
 }
 function delet(id, list) {
+  console.log(event.target.parentElement.parentElement.parentElement);
+  // const list = all[event.target.parentElement.parentElement.parentElement];
   console.log(id);
   console.log('*********************');
-  list = list.filter(function (item) {
-    console.log(item.id);
-    return item.id != id;
-  });
+  // list = list.filter(function (item) {
+  //   console.log(item.id);
+  //   return item.id != id;
+  // });
+  for (const item of list) {
+    if (item.id == id) {
+      list.splice(item, 1);
+    }
+  }
   event.target.parentElement.parentElement.remove();
+  localStorage.removeItem('completed');
+  localStorage.setItem('completed', JSON.stringify(completed));
   console.log(event.target.parentElement.parentElement);
+  console.log('------------------------');
   console.log(list);
+  render(completedList, completed);
 }
 
 function render(section, list) {
@@ -59,7 +75,7 @@ function render(section, list) {
       <p>
       <div class='icons'>
       <ion-icon onclick='edit()' id = 'edit' class ='icon' name="create-outline"></ion-icon>
-      <ion-icon  onclick="delet(${id} , completed)" class="icon" id ='delete' name="close-sharp"></ion-icon>
+      <ion-icon  onclick='delet(${id} , completed)' class="icon" id ='delete' name="close-sharp"></ion-icon>
       </div>`;
       section.appendChild(fragment);
     }
