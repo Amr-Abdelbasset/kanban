@@ -14,6 +14,8 @@ let inprogress = [];
 let completed = [];
 let drag = null;
 addColor();
+addLocal();
+render(completedList, completed);
 deleteBtn.forEach((btn) => {
   btn.addEventListener('click', function (event) {
     event.target.remove();
@@ -28,66 +30,37 @@ function edit(e) {
 }
 function delet(id, list) {
   console.log(id);
-  console.log(list);
-  for (const item of list) {
-    if ((item.id = id)) {
-      list.splice(id, 1);
-    }
-  }
+  console.log('*********************');
+  list = list.filter(function (item) {
+    console.log(item.id);
+    return item.id != id;
+  });
   event.target.parentElement.parentElement.remove();
   console.log(event.target.parentElement.parentElement);
   console.log(list);
 }
 
-addBtn1.addEventListener('click', function () {
-  const id = notStarted.length + 1;
-  render(notStartedList, notStarted);
-  const obj = { id: `${id}`, taskName: `Task ${id}` };
-  notStarted.push(obj);
-  const tempList = local(notStarted);
-  localStorage.setItem('notStarted', tempList);
-  dragItem();
-});
-addBtn2.addEventListener('click', function () {
-  const id = inprogress.length + 1;
-
-  const obj = { id: `${id}`, taskName: `Task ${id}` };
-  inprogress.push(obj);
-  const tempList = local(inprogress);
-  localStorage.setItem('inprogress', tempList);
-  render(inProgressList, inprogress);
-
-  dragItem();
-});
-addBtn3.addEventListener('click', function () {
-  const id = completed.length + 1;
-  const obj = { id: `${id}`, taskName: `Task ${id}` };
-  // completed.push(obj);
-  completed.push(obj['taskName']);
-  const tempList = local(completed);
-  localStorage.setItem('completed', tempList);
-  render(completedList, completed);
-  dragItem();
-});
 function render(section, list) {
   section.innerHTML = '';
+  console.log('************************');
+  console.log(list);
   if (list !== null) {
     for (const item of list) {
-      const text = item['taskName'];
+      const text = item.taskName;
       const fragment = document.createDocumentFragment();
       const li = fragment.appendChild(document.createElement('li'));
-      const id = item['id'];
+      const id = item.id;
       li.className = 'task';
       // li.innerHTML = `<p>Task ${id}<p>
       li.setAttribute('draggable', 'true');
       li.innerHTML = `
-    <input type="text" id="myText" disabled value="task"></input>
-    
-    <p>
-    <div class='icons'>
-    <ion-icon onclick='edit()' id = 'edit' class ='icon' name="create-outline"></ion-icon>
-    <ion-icon  onclick="delet(${id} , completed)" class="icon" id ='delete' name="close-sharp"></ion-icon>
-    </div>`;
+      <input type="text" id="myText" disabled value="task"></input>
+      
+      <p>
+      <div class='icons'>
+      <ion-icon onclick='edit()' id = 'edit' class ='icon' name="create-outline"></ion-icon>
+      <ion-icon  onclick="delet(${id} , completed)" class="icon" id ='delete' name="close-sharp"></ion-icon>
+      </div>`;
       section.appendChild(fragment);
     }
   }
@@ -152,14 +125,46 @@ blue.addEventListener('click', function () {
   localStorage.setItem('color', 'blue');
   addColor();
 });
-render(completed, completedList);
 function addLocal() {
-  if (localStorage.completed !== null) {
-    completed.push(JSON.parse(localStorage.getItem('completed') || '[]'));
+  const completedFromLocal = localStorage.getItem('completed');
+  if (completedFromLocal !== null && completedFromLocal.length > 0) {
+    completed = JSON.parse(localStorage.getItem('completed'));
   }
-  render(completed, completedList);
   console.log(completed);
+  // render(completed, completedList);
 }
-addLocal();
 
 // addEventListener('DOMContentLoaded', dragItem);
+
+addBtn1.addEventListener('click', function () {
+  const id = notStarted.length + 1;
+  render(notStartedList, notStarted);
+  const obj = { id: `${id}`, taskName: `Task ${id}` };
+  notStarted.push(obj);
+  // const tempList = local(notStarted);
+  localStorage.setItem('notStarted', JSON.stringify(notStarted));
+  dragItem();
+});
+addBtn2.addEventListener('click', function () {
+  const id = inprogress.length + 1;
+
+  const obj = { id: `${id}`, taskName: `Task ${id}` };
+  inprogress.push(obj);
+  // const tempList = local(inprogress);
+  localStorage.setItem('inprogress', JSON.stringify(inprogress));
+  render(inProgressList, inprogress);
+
+  dragItem();
+});
+addBtn3.addEventListener('click', function () {
+  const id = completed.length + 1;
+  const obj = { id: `${id}`, taskName: `Task ${id}` };
+  // completed.push(obj);
+  console.log('*****************');
+  console.log(completed);
+  console.log(obj);
+  completed.push(obj);
+  localStorage.setItem('completed', JSON.stringify(completed));
+  render(completedList, completed);
+  dragItem();
+});
