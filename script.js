@@ -9,13 +9,13 @@ const list = document.getElementById('list');
 const deleteBtn = document.querySelectorAll('.icon');
 const green = document.getElementById('ww');
 const blue = document.querySelector('.blue');
-let notStarted = [];
-let inprogress = [];
-let completed = [];
+// let notStarted = [];
+// let inprogress = [];
+// let completed = [];
 const A = 'notStarted';
 const B = 'inprogress';
 const C = 'completed';
-let data = [];
+let data = JSON.parse(localStorage.getItem('data')) || [];
 let drag = null;
 const all = {
   notStartedList: 'notStarted',
@@ -24,36 +24,36 @@ const all = {
 };
 // window.addEventListener('load', renderAll);
 addColor();
-addLocal();
+// addLocal();
 console.log('======');
 console.log(data);
-renderAll();
+// renderAll();
 render(notStartedList, A);
 render(inProgressList, B);
 render(completedList, C);
-deleteBtn.forEach((btn) => {
-  btn.addEventListener('click', function (event) {
-    event.target.remove();
-    console.log(event);
-  });
-});
-function renderAll() {
-  data.forEach((item) => {
-    // console.log(item);
-    if (item.statue === A) {
-      render(notStartedList, A);
-    } else if (item.statue === B) {
-      render(inProgressList, B);
-    } else if (item.statue === C) {
-      render(completedList, C);
-    }
-  });
-}
-function edit(e) {
-  // console.log(event.trget.closest('li'));
-  const li = event.target.closest('li');
-  li.querySelector('input').removeAttribute('disabled');
-}
+// deleteBtn.forEach((btn) => {
+//   btn.addEventListener('click', function (event) {
+//     event.target.remove();
+//     console.log(event);
+//   });
+// });
+// function renderAll() {
+//   data.forEach((item) => {
+//     // console.log(item);
+//     if (item.statue === A) {
+//       render(notStartedList, A);
+//     } else if (item.statue === B) {
+//       render(inProgressList, B);
+//     } else if (item.statue === C) {
+//       render(completedList, C);
+//     }
+//   });
+// }
+// function edit(e) {
+//   // console.log(event.trget.closest('li'));
+//   const li = event.target.closest('li');
+//   li.querySelector('input').removeAttribute('disabled');
+// }
 function delet(id) {
   // console.log(event.target.parentElement.parentElement.parentElement);
   // const list = `${
@@ -119,13 +119,13 @@ function render(section, statuee) {
     });
   }
 }
-function local(list) {
-  const mappedList = [];
-  for (const item of list) {
-    mappedList.push(JSON.stringify(item));
-  }
-  return mappedList;
-}
+// function local(list) {
+//   const mappedList = [];
+//   for (const item of list) {
+//     mappedList.push(JSON.stringify(item));
+//   }
+//   return mappedList;
+// }
 function dragItem() {
   const items = document.querySelectorAll('.task');
   const ul = document.querySelectorAll('ul');
