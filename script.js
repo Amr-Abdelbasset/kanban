@@ -231,8 +231,6 @@ addBtn3.addEventListener('click', function () {
   const id = Math.random();
   const obj = { id: `${id}`, taskName: `Task ${id}`, statue: C };
   // completed.push(obj);
-  console.log('*****************');
-  console.log(completed);
   console.log(obj);
   data.push(obj);
   localStorage.setItem('data', JSON.stringify(data));

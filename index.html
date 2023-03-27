@@ -15,32 +15,22 @@
       </div>
       <h1>Kanban Board</h1>
       <div class="lists">
-        <div data-name="NotStarted" class="list">
+        <div class="list" data-name="notStarted">
           <h2>Not Started</h2>
-          <ul id="NotStartedList"></ul>
+          <ul id="NotStartedList" data-name="notStarted"></ul>
           <button id="addBtn1" class="add">+ Add</button>
         </div>
-        <div data-name="inProgress" class="list">
+        <div class="list" data-name="inprogress">
           <h2>In progress</h2>
           <ul id="inProgressList"></ul>
-          <div id="list"></div>
-          <button id="addBtn2" class="add">
-            + Add <ion-icon class="close-icon" name="close-sharp"></ion-icon>
-          </button>
+          <button id="addBtn2" class="add">+ Add</button>
         </div>
-        <div data-name="Completed" class="list">
+        <div class="list" data-name="completed">
           <h2>Completed</h2>
-          <div class="items" id="items">
-            <ul id="completedList"></ul>
-          </div>
+          <ul id="completedList"></ul>
           <button id="addBtn3" class="add">+ Add</button>
         </div>
       </div>
-    </div>
-    <div class="footer">
-      <footer>
-        <p>@ By Amr Abdelbaset</p>
-      </footer>
     </div>
 
     <script src="script.js" defer></script>
