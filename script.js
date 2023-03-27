@@ -23,7 +23,14 @@ const all = {
   completedList: 'completed',
 };
 // window.addEventListener('load', renderAll);
-
+addColor();
+addLocal();
+console.log('======');
+console.log(data);
+renderAll();
+render(notStartedList, A);
+render(inProgressList, B);
+render(completedList, C);
 deleteBtn.forEach((btn) => {
   btn.addEventListener('click', function (event) {
     event.target.remove();
@@ -180,6 +187,7 @@ function addColor() {
   }
 }
 
+dragItem();
 green.addEventListener('click', function () {
   localStorage.setItem('color', `''`);
   addColor();
@@ -231,12 +239,3 @@ addBtn3.addEventListener('click', function () {
   render(completedList, C);
   dragItem();
 });
-dragItem();
-addColor();
-addLocal();
-console.log('======');
-console.log(data);
-renderAll();
-render(notStartedList, A);
-render(inProgressList, B);
-render(completedList, C);
