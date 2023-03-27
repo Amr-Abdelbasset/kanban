@@ -12,73 +12,104 @@ const blue = document.querySelector('.blue');
 let notStarted = [];
 let inprogress = [];
 let completed = [];
+const A = 'notStarted';
+const B = 'inprogress';
+const C = 'completed';
+let data = [];
 let drag = null;
 const all = {
   notStartedList: 'notStarted',
   inProgressList: 'inprogress',
   completedList: 'completed',
 };
-addColor();
-addLocal();
-render(completedList, completed);
+// window.addEventListener('load', renderAll);
+
 deleteBtn.forEach((btn) => {
   btn.addEventListener('click', function (event) {
     event.target.remove();
     console.log(event);
   });
 });
-
+function renderAll() {
+  data.forEach((item) => {
+    // console.log(item);
+    if (item.statue === A) {
+      render(notStartedList, A);
+    } else if (item.statue === B) {
+      render(inProgressList, B);
+    } else if (item.statue === C) {
+      render(completedList, C);
+    }
+  });
+}
 function edit(e) {
   // console.log(event.trget.closest('li'));
   const li = event.target.closest('li');
   li.querySelector('input').removeAttribute('disabled');
 }
-function delet(id, list) {
-  console.log(event.target.parentElement.parentElement.parentElement);
-  // const list = all[event.target.parentElement.parentElement.parentElement];
+function delet(id) {
+  // console.log(event.target.parentElement.parentElement.parentElement);
+  // const list = `${
+  //   all[event.target.parentElement.parentElement.parentElement.id]
+  // }`;
   console.log(id);
   console.log('*********************');
-  // list = list.filter(function (item) {
-  //   console.log(item.id);
-  //   return item.id != id;
-  // });
-  for (const item of list) {
-    if (item.id == id) {
-      list.splice(item, 1);
-    }
-  }
+  // console.log(list);
+  data = data.filter(function (item) {
+    console.log(item.id);
+    return item.id !== id;
+  });
+  // for (const item of data) {
+  //   if (item.id == id) {
+  //     data.splice(item, 1);
+  //   }
+  // }
+  console.log(data);
   event.target.parentElement.parentElement.remove();
-  localStorage.removeItem('completed');
-  localStorage.setItem('completed', JSON.stringify(completed));
-  console.log(event.target.parentElement.parentElement);
+  // console.log(event.target.parentElement.parentElement);
+
+  // localStorage.removeItem(data);
+  localStorage.setItem('data', JSON.stringify(data));
+  // render(completedList, completed);
+  // console.log(event.target.parentElement.parentElement);
   console.log('------------------------');
-  console.log(list);
-  render(completedList, completed);
 }
 
-function render(section, list) {
+function render(section, statuee) {
   section.innerHTML = '';
+  // const text = `${JSON.stringify(listName)}`;
   console.log('************************');
-  console.log(list);
-  if (list !== null) {
-    for (const item of list) {
-      const text = item.taskName;
-      const fragment = document.createDocumentFragment();
-      const li = fragment.appendChild(document.createElement('li'));
-      const id = item.id;
-      li.className = 'task';
-      // li.innerHTML = `<p>Task ${id}<p>
-      li.setAttribute('draggable', 'true');
-      li.innerHTML = `
-      <input type="text" id="myText" disabled value="task"></input>
-      
-      <p>
-      <div class='icons'>
-      <ion-icon onclick='edit()' id = 'edit' class ='icon' name="create-outline"></ion-icon>
-      <ion-icon  onclick='delet(${id} , completed)' class="icon" id ='delete' name="close-sharp"></ion-icon>
-      </div>`;
-      section.appendChild(fragment);
-    }
+  // console.log(text);
+  if (data !== null) {
+    let x = 0;
+    data.forEach(function (item) {
+      if (item.statue === statuee) {
+        console.log('------==------');
+        console.log(item);
+        console.log('------====-------');
+        const text = item.taskName;
+        const fragment = document.createDocumentFragment();
+        const li = fragment.appendChild(document.createElement('li'));
+        const id = item.id;
+        li.className = 'task';
+        // li.innerHTML = `<p>Task ${id}<p>
+        li.setAttribute('draggable', 'true');
+        li.setAttribute('data-id', `${id}`);
+        li.innerHTML = `
+        <input type="text" id="myText" disabled value="task"></input>
+        
+        <p>
+        <div class='icons'>
+        <ion-icon onclick='edit()' id = 'edit' class ='icon' name="create-outline"></ion-icon>
+        
+        <ion-icon  onclick="delet(
+          '${id}')
+          " class="icon" id ='delete' name="close-sharp"></ion-icon>
+          </div>`;
+        section.appendChild(fragment);
+      } else {
+      }
+    });
   }
 }
 function local(list) {
@@ -106,6 +137,7 @@ function dragItem() {
       item.style.opacity = '1';
     });
     lists.forEach((lst) => {
+      const completedList = document.getElementById('completedList');
       lst.addEventListener('dragover', function (e) {
         e.preventDefault();
         // console.log(lst);
@@ -118,13 +150,28 @@ function dragItem() {
       });
       lst.addEventListener('drop', function () {
         this.querySelector('ul').appendChild(drag);
+        const listName = lst.getAttribute('data-name');
+        const idDrag = drag.getAttribute('data-id');
+        console.log(lst.getAttribute('data-name'));
+        data.forEach((item) => {
+          if (item.id === idDrag) {
+            item.statue = listName;
+            localStorage.setItem('data', JSON.stringify(data));
+          }
+        });
       });
+      addLocal();
+      // render(notStartedList, A);
+      // render(inProgressList, B);
+      // render(completedList, C);
     });
   });
 }
+// render(notStartedList, A);
+// render(inProgressList, B);
+// render(completedList, C);
 // window.localStorage.setItem('body', document.querySelector('body'));
 // document.body.innerHTML = window.localStorage.getItem('body');
-dragItem();
 //change color
 function addColor() {
   if (localStorage.getItem('color')) {
@@ -142,45 +189,54 @@ blue.addEventListener('click', function () {
   addColor();
 });
 function addLocal() {
-  const completedFromLocal = localStorage.getItem('completed');
-  if (completedFromLocal !== null && completedFromLocal.length > 0) {
-    completed = JSON.parse(localStorage.getItem('completed'));
+  const dataFromLocal = localStorage.getItem('data');
+  if (dataFromLocal !== null && dataFromLocal.length > 0) {
+    data = JSON.parse(localStorage.getItem('data'));
   }
-  console.log(completed);
-  // render(completed, completedList);
+  return data;
+  yy; // render(completed, completedList);
 }
 
 // addEventListener('DOMContentLoaded', dragItem);
 
 addBtn1.addEventListener('click', function () {
-  const id = notStarted.length + 1;
-  render(notStartedList, notStarted);
-  const obj = { id: `${id}`, taskName: `Task ${id}` };
-  notStarted.push(obj);
+  const id = Math.random();
+  const obj = { id: `${id}`, taskName: `Task ${id}`, statue: A };
+  data.push(obj);
   // const tempList = local(notStarted);
-  localStorage.setItem('notStarted', JSON.stringify(notStarted));
+  localStorage.setItem('data', JSON.stringify(data));
+  render(notStartedList, A);
   dragItem();
 });
 addBtn2.addEventListener('click', function () {
-  const id = inprogress.length + 1;
+  const id = Math.random();
 
-  const obj = { id: `${id}`, taskName: `Task ${id}` };
-  inprogress.push(obj);
+  const obj = { id: `${id}`, taskName: `Task ${id}`, statue: B };
+  data.push(obj);
   // const tempList = local(inprogress);
-  localStorage.setItem('inprogress', JSON.stringify(inprogress));
-  render(inProgressList, inprogress);
+  localStorage.setItem('data', JSON.stringify(data));
+  render(inProgressList, B);
 
   dragItem();
 });
 addBtn3.addEventListener('click', function () {
-  const id = completed.length + 1;
-  const obj = { id: `${id}`, taskName: `Task ${id}` };
+  const id = Math.random();
+  const obj = { id: `${id}`, taskName: `Task ${id}`, statue: C };
   // completed.push(obj);
   console.log('*****************');
   console.log(completed);
   console.log(obj);
-  completed.push(obj);
-  localStorage.setItem('completed', JSON.stringify(completed));
-  render(completedList, completed);
+  data.push(obj);
+  localStorage.setItem('data', JSON.stringify(data));
+  render(completedList, C);
   dragItem();
 });
+dragItem();
+addColor();
+addLocal();
+console.log('======');
+console.log(data);
+renderAll();
+render(notStartedList, A);
+render(inProgressList, B);
+render(completedList, C);
