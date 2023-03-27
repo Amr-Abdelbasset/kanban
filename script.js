@@ -167,7 +167,7 @@ function dragItem() {
           }
         });
       });
-      addLocal();
+      // addLocal();
       // render(notStartedList, A);
       // render(inProgressList, B);
       // render(completedList, C);
@@ -196,14 +196,14 @@ blue.addEventListener('click', function () {
   localStorage.setItem('color', 'blue');
   addColor();
 });
-function addLocal() {
-  const dataFromLocal = localStorage.getItem('data');
-  if (dataFromLocal !== null && dataFromLocal.length > 0) {
-    data = JSON.parse(localStorage.getItem('data'));
-  }
-  return data;
-  yy; // render(completed, completedList);
-}
+// function addLocal() {
+//   const dataFromLocal = localStorage.getItem('data');
+//   if (dataFromLocal !== null && dataFromLocal.length > 0) {
+//     data = JSON.parse(localStorage.getItem('data'));
+//   }
+//   return data;
+//   yy; // render(completed, completedList);
+// }
 
 // addEventListener('DOMContentLoaded', dragItem);
 
