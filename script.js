@@ -25,6 +25,23 @@ render(notStartedList, A);
 render(inProgressList, B);
 render(completedList, C);
 
+function edit(id) {
+  const li = event.target.parentElement.parentElement;
+  li.innerHTML = `<input type="text" id="myText" ></input>
+  
+  `;
+  console.log(li.querySelector('form'));
+  const input = li.querySelector('input').value;
+  console.log(input);
+
+  // const input = e.target.
+  data.forEach((item) => {
+    // if(item.id === id){
+    //   item.taskName =
+    // }
+  });
+}
+
 function delet(id) {
   data = data.filter(function (item) {
     console.log(item.id);
@@ -50,11 +67,10 @@ function render(section, statuee) {
         li.setAttribute('draggable', 'true');
         li.setAttribute('data-id', `${id}`);
         li.innerHTML = `
-        <input type="text" id="myText" disabled value="task"></input>
         
-        <p>
+        <p>${text}</p>
         <div class='icons'>
-        <ion-icon onclick='edit()' id = 'edit' class ='icon' name="create-outline"></ion-icon>
+        <ion-icon onclick='edit(${id})' id = 'edit' class ='icon' name="create-outline"></ion-icon>
         
         <ion-icon  onclick="delet(
           '${id}')
@@ -122,7 +138,7 @@ blue.addEventListener('click', function () {
 
 addBtn1.addEventListener('click', function () {
   const id = Math.random();
-  const obj = { id: `${id}`, taskName: `Task ${id}`, statue: A };
+  const obj = { id: `${id}`, taskName: `New Task`, statue: A };
   data.push(obj);
   localStorage.setItem('data', JSON.stringify(data));
   render(notStartedList, A);
@@ -131,7 +147,7 @@ addBtn1.addEventListener('click', function () {
 addBtn2.addEventListener('click', function () {
   const id = Math.random();
 
-  const obj = { id: `${id}`, taskName: `Task ${id}`, statue: B };
+  const obj = { id: `${id}`, taskName: `New Task`, statue: B };
   data.push(obj);
   localStorage.setItem('data', JSON.stringify(data));
   render(inProgressList, B);
@@ -140,7 +156,7 @@ addBtn2.addEventListener('click', function () {
 });
 addBtn3.addEventListener('click', function () {
   const id = Math.random();
-  const obj = { id: `${id}`, taskName: `Task ${id}`, statue: C };
+  const obj = { id: `${id}`, taskName: `New Task`, statue: C };
   data.push(obj);
   localStorage.setItem('data', JSON.stringify(data));
   render(completedList, C);

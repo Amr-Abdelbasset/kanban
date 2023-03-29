@@ -1,0 +1,28 @@
+/* // for 600 px width */
+@media (max-width: 39em) {
+  html {
+    font-size: 50%;
+  }
+
+  body {
+    font-size: 1.6rem;
+    /* background-color: aqua; */
+    margin: 0 auto;
+  }
+}
+@media (max-width: 31.5em) {
+  html {
+    font-size: 43.75%;
+  }
+  body {
+    font-size: 1.4rem;
+    /* background-color: blueviolet; */
+  }
+  .lists {
+    flex-direction: column;
+    margin-top: 8.8rem;
+    align-items: center;
+    gap: 4rem;
+    max-width: 120rem;
+  }
+} ;
