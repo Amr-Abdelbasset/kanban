@@ -13,7 +13,6 @@ const A = 'notStarted';
 const B = 'inprogress';
 const C = 'completed';
 let data = JSON.parse(localStorage.getItem('data')) || [];
-let drag = null;
 // const all = {
 //   notStartedList: 'notStarted',
 //   inProgressList: 'inprogress',
@@ -28,10 +27,10 @@ render(completedList, C);
 
 //edit function
 function edit(id) {
-   const li = event.target.parentElement.parentElement;
+  const li = event.target.parentElement.parentElement;
   li.innerHTML = `<input class='input' type="text" id="myText" ></input>
   `;
-   const input = li.querySelector('input');
+  const input = li.querySelector('input');
   input.addEventListener('change', function () {
     const txt = event.target.value;
     data.forEach((item) => {
@@ -39,12 +38,9 @@ function edit(id) {
         item.taskName = txt;
       }
       localStorage.setItem('data', JSON.stringify(data));
-      render(notStartedList, A);
-      render(inProgressList, B);
-      render(completedList, C);
+      location.reload();
     });
   });
-  
 }
 //delete function
 function delet(id) {
@@ -89,6 +85,8 @@ function render(section, statuee) {
 }
 // drag & drop functionality
 function dragItem() {
+  let drag = null;
+
   const items = document.querySelectorAll('.task');
   const ul = document.querySelectorAll('ul');
   items.forEach((item) => {
