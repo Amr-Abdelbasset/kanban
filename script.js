@@ -29,7 +29,7 @@ function edit(id) {
   // console.log(id);
   // const inn = prompt('Enter');
   const li = event.target.parentElement.parentElement;
-  li.innerHTML = `<input type="text" id="myText" ></input>
+  li.innerHTML = `<input class='input' type="text" id="myText" ></input>
   `;
   // const inp = document.getElementById('myText');
   // console.log(li.querySelector('form'));
@@ -93,10 +93,8 @@ function render(section, statuee) {
           '${id}')
           " class="icon" id ='delete' name="close-sharp"></ion-icon>
           </div>
-          <button type="submit" ></button>
           `;
         section.appendChild(fragment);
-      } else {
       }
     });
   }
@@ -107,6 +105,7 @@ function dragItem() {
   const ul = document.querySelectorAll('ul');
   items.forEach((item) => {
     item.addEventListener('dragstart', function () {
+      // this.style.background = '#2EBD95';
       drag = item;
       item.style.opacity = '0.5';
     });
@@ -121,7 +120,7 @@ function dragItem() {
         this.style.background = '#007962';
       });
       lst.addEventListener('dragleave', function (e) {
-        this.style.background = '#4daa99';
+        this.style.background = '#389E81';
       });
       lst.addEventListener('drop', function () {
         this.querySelector('ul').appendChild(drag);

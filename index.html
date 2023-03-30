@@ -7,6 +7,12 @@
     <title>Kanban Board</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="query.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,500;1,500&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body class="green">
     <div class="main-container">
@@ -18,22 +24,26 @@
       <div class="lists">
         <div class="list" data-name="notStarted">
           <h2>Not Started</h2>
-          <ul id="NotStartedList" data-name="notStarted"></ul>
+          <ul class="task-list" id="NotStartedList" data-name="notStarted"></ul>
           <button id="addBtn1" class="add">+ Add</button>
         </div>
         <div class="list" data-name="inprogress">
           <h2>In progress</h2>
-          <ul id="inProgressList"></ul>
+          <ul class="task-list" id="inProgressList"></ul>
           <button id="addBtn2" class="add">+ Add</button>
         </div>
         <div class="list" data-name="completed">
           <h2>Completed</h2>
-          <ul id="completedList"></ul>
+          <ul class="task-list" id="completedList"></ul>
           <button id="addBtn3" class="add">+ Add</button>
         </div>
       </div>
     </div>
-
+    <section class="footer">
+      <a href="https://www.linkedin.com/in/amr-abdelbasset-631168b1/">
+        @ By Amr Adelbaset
+      </a>
+    </section>
     <script src="script.js" defer></script>
     <script
       type="module"
