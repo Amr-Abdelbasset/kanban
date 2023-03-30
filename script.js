@@ -36,9 +36,11 @@ function edit(id) {
   const input = li.querySelector('input');
   // console.log(input);
   input.addEventListener('change', function () {
+    // console.log(event.target.value);
+    const txt = event.target.value;
     data.forEach((item) => {
       if (item.id == id) {
-        console.log(item);
+        // console.log(item);
         item.taskName = txt;
       }
       localStorage.setItem('data', JSON.stringify(data));
