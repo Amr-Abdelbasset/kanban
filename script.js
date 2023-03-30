@@ -14,11 +14,11 @@ const B = 'inprogress';
 const C = 'completed';
 let data = JSON.parse(localStorage.getItem('data')) || [];
 let drag = null;
-const all = {
-  notStartedList: 'notStarted',
-  inProgressList: 'inprogress',
-  completedList: 'completed',
-};
+// const all = {
+//   notStartedList: 'notStarted',
+//   inProgressList: 'inprogress',
+//   completedList: 'completed',
+// };
 addColor();
 
 render(notStartedList, A);
@@ -26,15 +26,15 @@ render(inProgressList, B);
 render(completedList, C);
 
 function edit(id) {
-  console.log(id);
-  const inn = prompt('Enter');
+  // console.log(id);
+  // const inn = prompt('Enter');
   const li = event.target.parentElement.parentElement;
   li.innerHTML = `<input type="text" id="myText" ></input>
   `;
-  const inp = document.getElementById('myText');
-  console.log(li.querySelector('form'));
+  // const inp = document.getElementById('myText');
+  // console.log(li.querySelector('form'));
   const input = li.querySelector('input');
-  console.log(input);
+  // console.log(input);
   input.addEventListener('change', function () {
     data.forEach((item) => {
       if (item.id == id) {
@@ -47,15 +47,15 @@ function edit(id) {
       render(completedList, C);
     });
   });
-  data.forEach((item) => {
-    if (item.id === id) {
-      console.log(item);
-      item.taskName = inn;
-    }
-  });
-  console.log(inp.value);
-  // li.textContent = inp.value;
-  // const input = e.target.
+  // data.forEach((item) => {
+  //   if (item.id === id) {
+  //     console.log(item);
+  //     item.taskName = inn;
+  //   }
+  // });
+  // console.log(inp.value);
+  // // li.textContent = inp.value;
+  // // const input = e.target.
 }
 
 function delet(id) {
@@ -180,10 +180,10 @@ addBtn3.addEventListener('click', function () {
   dragItem();
 });
 
-const form = document.querySelectorAll('myForm');
-form.forEach((item) => {
-  item.addEventListener('submit', function (e) {
-    e.preventDefault();
-    console.log(form.value);
-  });
-});
+// const form = document.querySelectorAll('myForm');
+// form.forEach((item) => {
+//   item.addEventListener('submit', function (e) {
+//     e.preventDefault();
+//     console.log(form.value);
+//   });
+// });
