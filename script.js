@@ -26,20 +26,36 @@ render(inProgressList, B);
 render(completedList, C);
 
 function edit(id) {
+  console.log(id);
+  const inn = prompt('Enter');
   const li = event.target.parentElement.parentElement;
   li.innerHTML = `<input type="text" id="myText" ></input>
-  
   `;
+  const inp = document.getElementById('myText');
   console.log(li.querySelector('form'));
-  const input = li.querySelector('input').value;
+  const input = li.querySelector('input');
   console.log(input);
-
-  // const input = e.target.
-  data.forEach((item) => {
-    // if(item.id === id){
-    //   item.taskName =
-    // }
+  input.addEventListener('change', function () {
+    data.forEach((item) => {
+      if (item.id == id) {
+        console.log(item);
+        item.taskName = txt;
+      }
+      localStorage.setItem('data', JSON.stringify(data));
+      render(notStartedList, A);
+      render(inProgressList, B);
+      render(completedList, C);
+    });
   });
+  data.forEach((item) => {
+    if (item.id === id) {
+      console.log(item);
+      item.taskName = inn;
+    }
+  });
+  console.log(inp.value);
+  // li.textContent = inp.value;
+  // const input = e.target.
 }
 
 function delet(id) {
@@ -67,7 +83,6 @@ function render(section, statuee) {
         li.setAttribute('draggable', 'true');
         li.setAttribute('data-id', `${id}`);
         li.innerHTML = `
-        
         <p>${text}</p>
         <div class='icons'>
         <ion-icon onclick='edit(${id})' id = 'edit' class ='icon' name="create-outline"></ion-icon>
@@ -75,7 +90,9 @@ function render(section, statuee) {
         <ion-icon  onclick="delet(
           '${id}')
           " class="icon" id ='delete' name="close-sharp"></ion-icon>
-          </div>`;
+          </div>
+          <button type="submit" ></button>
+          `;
         section.appendChild(fragment);
       } else {
       }
@@ -161,4 +178,12 @@ addBtn3.addEventListener('click', function () {
   localStorage.setItem('data', JSON.stringify(data));
   render(completedList, C);
   dragItem();
+});
+
+const form = document.querySelectorAll('myForm');
+form.forEach((item) => {
+  item.addEventListener('submit', function (e) {
+    e.preventDefault();
+    console.log(form.value);
+  });
 });
