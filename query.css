@@ -1,7 +1,7 @@
 /* // for 600 px width */
 @media (max-width: 39em) {
   html {
-    font-size: 50%;
+    font-size: 41%;
   }
 
   body {
@@ -22,7 +22,7 @@
     flex-direction: column;
     margin-top: 8.8rem;
     align-items: center;
-    gap: 4rem;
-    max-width: 120rem;
+    gap: 6rem;
+    /* max-width: 120rem; */
   }
 } ;
