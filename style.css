@@ -133,18 +133,13 @@ h2 {
 }
 
 .task {
-  /* display: inline-block; */
-  /* margin: auto; */
   font-size: 1.8rem;
   font-weight: 300;
-  /* margin: 2rem; */
   background-color: #fff;
   color: black;
   text-align: center;
-  /* min-width: 65%; */
-  /* max-width: 90%; */
+
   width: 90%;
-  /* max-height: 5.8rem; */
   padding: 1.2rem 3.4rem;
   display: flex;
   position: relative;
@@ -155,8 +150,6 @@ h2 {
   border-radius: 8px;
 }
 .task p {
-  /* display: block; */
-  /* max-width: 50%; */
   margin-right: 3.3rem;
   width: fit-content;
   block-size: fit-content;
@@ -180,7 +173,6 @@ h2 {
   width: 2.4rem;
   height: 2.4rem;
   color: black;
-  /* display: inline; */
 }
 .task-name {
   text-align: center;
@@ -188,8 +180,6 @@ h2 {
   display: block;
 }
 .footer {
-  /* margin-left: auto;
-  margin-right: auto; */
   position: absolute;
   bottom: 5%;
   left: 45%;
@@ -203,10 +193,7 @@ h2 {
   font-size: 1.8rem;
   font-weight: 500;
 }
-/* .input {
-  max-width: 90%;
-  min-width: 70%;
-} */
+
 #edit {
   fill: #6b6b6b;
   color: #4fa395;

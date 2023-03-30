@@ -21,26 +21,21 @@ let drag = null;
 // };
 addColor();
 
+// start rendering
 render(notStartedList, A);
 render(inProgressList, B);
 render(completedList, C);
 
+//edit function
 function edit(id) {
-  // console.log(id);
-  // const inn = prompt('Enter');
-  const li = event.target.parentElement.parentElement;
+   const li = event.target.parentElement.parentElement;
   li.innerHTML = `<input class='input' type="text" id="myText" ></input>
   `;
-  // const inp = document.getElementById('myText');
-  // console.log(li.querySelector('form'));
-  const input = li.querySelector('input');
-  // console.log(input);
+   const input = li.querySelector('input');
   input.addEventListener('change', function () {
-    // console.log(event.target.value);
     const txt = event.target.value;
     data.forEach((item) => {
       if (item.id == id) {
-        // console.log(item);
         item.taskName = txt;
       }
       localStorage.setItem('data', JSON.stringify(data));
@@ -49,17 +44,9 @@ function edit(id) {
       render(completedList, C);
     });
   });
-  // data.forEach((item) => {
-  //   if (item.id === id) {
-  //     console.log(item);
-  //     item.taskName = inn;
-  //   }
-  // });
-  // console.log(inp.value);
-  // // li.textContent = inp.value;
-  // // const input = e.target.
+  
 }
-
+//delete function
 function delet(id) {
   data = data.filter(function (item) {
     console.log(item.id);
@@ -71,6 +58,7 @@ function delet(id) {
   localStorage.setItem('data', JSON.stringify(data));
 }
 
+//render the list
 function render(section, statuee) {
   section.innerHTML = '';
   if (data !== null) {
@@ -99,7 +87,7 @@ function render(section, statuee) {
     });
   }
 }
-
+// drag & drop functionality
 function dragItem() {
   const items = document.querySelectorAll('.task');
   const ul = document.querySelectorAll('ul');
